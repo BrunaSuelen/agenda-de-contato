@@ -1,0 +1,99 @@
+@charset "utf-8";
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
+
+body {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 1em;
+	font-weight: 400;
+}
+
+.content {
+	margin: 20vh auto;
+    display: grid;
+    width: 100%;
+    justify-content: center;
+}
+
+.phone-wallpaper {
+	width: 200px;
+	margin: auto;
+}
+
+h1 {
+	color: #526ad1;
+    text-align: center;
+    margin-top: 2rem;
+    margin-bottom: 4rem;
+}
+
+.botao1 {
+    display: block;
+	text-decoration: none;
+    padding: 10px 15px;
+    font-size: 1.2em;
+    font-weight: 700;
+    border-radius: 5px;
+    text-align: center;
+    border: 2px solid;
+    color: #546bd0;
+    cursor: pointer;
+}
+
+.botao2 {
+    display: block;
+    text-decoration: none;
+    padding: 10px 15px;
+    font-size: 1em;
+    font-weight: 700;
+    border-radius: 5px;
+    text-align: center;
+    border: 2px solid;
+    color: #546bd0;
+    cursor: pointer;
+    margin: 0 15px;
+    width: 30%;
+}
+
+input {
+	width: 320px;
+    height: 30px;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+    border: 1px solid #7e7e7e;
+    border-radius: 5px;
+}
+
+input:focus-visible {
+    outline: 2px solid #babeed;
+    border-color: #babeed;
+}
+
+input.input-telefone {
+	width: 250px;
+}
+
+form {
+    width: 100%;
+}
+
+#table {
+	border-spacing: 15px;
+}
+
+#table thead tr {
+	outline: 1px solid #babeed;
+    color: #526ad0;
+    padding: 5px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+#table thead tr th {
+    padding: 10px 5px;
+    font-weight: 400;
+    color: #526ad0;
+}
+
+#table tbody tr td {
+    color: #848484;
+}
