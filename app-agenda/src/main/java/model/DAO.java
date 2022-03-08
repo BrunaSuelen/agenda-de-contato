@@ -128,4 +128,24 @@ public class DAO {
 			System.out.println(e);
 		}
 	}
+
+	/** CRUD UPDATE **/
+	public void atualizarContato(JavaBeans contato) {
+		String update = "UPDATE contatos set nome=?, telefone=?, email=? where id = ?";
+		
+		try {
+			Connection con = conectar();
+			PreparedStatement pst = con.prepareStatement(update);
+
+			pst.setString(4, contato.getId());
+			pst.setString(1, contato.getNome());
+			pst.setString(2, contato.getTelefone());
+			pst.setString(3, contato.getEmail());
+			
+			pst.executeUpdate();
+			con.close();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
 }
