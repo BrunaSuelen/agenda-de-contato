@@ -16,8 +16,10 @@ import model.JavaBeans;
 @WebServlet(urlPatterns = { 
 		"/Controller", 
 		"/main",
-		"/insert"
+		"/insert",
+		"/select"
 	})
+
 public class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	DAO dao = new DAO();
@@ -33,6 +35,7 @@ public class Controller extends HttpServlet {
 		switch(action) {
 			case "/main": contatos(request, response); break;
 			case "/insert": novoContato(request, response); break;
+			case "/select": editarContato(request, response); break;
 			default: response.sendRedirect("index.html");
 		}
 	}
@@ -64,6 +67,12 @@ public class Controller extends HttpServlet {
 		dao.inserirContato(contato);
 		
 		response.sendRedirect("main");
+	}
+	
+	// Editar contato 
+	protected void editarContato(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String id = request.getParameter("id");
+		System.out.println(id);
 	}
 }
 ;
