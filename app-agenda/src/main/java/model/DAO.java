@@ -30,6 +30,29 @@ public class DAO {
 		}
 	}
 	
+	/** SELECT ITEM **/
+	public void buscarContatoPorId(JavaBeans contato) {
+		String search = "select * from contatos where id = ?";
+		
+		try {
+			Connection con = conectar();
+			PreparedStatement pst = con.prepareStatement(search);
+			pst.setString(1, contato.getId());
+			ResultSet rs = pst.executeQuery();
+					
+			while(rs.next()) {
+				contato.setNome(rs.getString(2));
+				contato.setTelefone(rs.getString(3));
+				contato.setEmail(rs.getString(4));
+			}
+			
+			con.close();
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
+	
 	/** CRUD CREATE **/
 	public void inserirContato(JavaBeans contato) {
 		String create = "insert into contatos(nome, telefone, email) values (?, ?, ?)";
