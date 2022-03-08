@@ -17,7 +17,8 @@ import model.JavaBeans;
 		"/Controller", 
 		"/main",
 		"/insert",
-		"/select"
+		"/select",
+		"/update"
 	})
 
 public class Controller extends HttpServlet {
@@ -36,6 +37,7 @@ public class Controller extends HttpServlet {
 			case "/main": contatos(request, response); break;
 			case "/insert": novoContato(request, response); break;
 			case "/select": consultaContato(request, response); break;
+			case "/update": editarContato(request, response); break;
 			default: response.sendRedirect("index.html");
 		}
 	}
@@ -58,19 +60,14 @@ public class Controller extends HttpServlet {
 		contato.setEmail(request.getParameter("email"));
 		
 		dao.inserirContato(contato);
-		
 		response.sendRedirect("main");
 	}
 	
-	// Editar contato 
+	// Consultar contato 
 	protected void consultaContato(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("id");
 		contato.setId(id);
 		dao.buscarContatoPorId(contato);
-		System.out.println("---");
-		System.out.println(contato.getId());
-		System.out.println(contato.getNome());
-		System.out.println(contato.getTelefone());
 
 		request.setAttribute("id", contato.getId());
 		request.setAttribute("nome", contato.getNome());
@@ -79,5 +76,16 @@ public class Controller extends HttpServlet {
 
 		RequestDispatcher rd = request.getRequestDispatcher("editar.jsp");
 		rd.forward(request, response);
+	}
+
+	// Editar contato
+	protected void editarContato(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		contato.setId(request.getParameter("id"));
+		contato.setNome(request.getParameter("nome"));
+		contato.setTelefone(request.getParameter("telefone"));
+		contato.setEmail(request.getParameter("email"));
+
+		dao.atualizarContato(contato);
+		response.sendRedirect("main");
 	}
 }
