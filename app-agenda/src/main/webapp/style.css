@@ -8,7 +8,7 @@ body {
 }
 
 .content {
-	margin: 20vh auto;
+	margin: 15vh auto;
     display: grid;
     width: 100%;
     justify-content: center;
@@ -22,7 +22,6 @@ body {
 h1 {
 	color: #526ad1;
     text-align: center;
-    margin-top: 2rem;
     margin-bottom: 4rem;
 }
 
