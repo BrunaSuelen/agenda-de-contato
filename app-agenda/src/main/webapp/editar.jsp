@@ -14,7 +14,7 @@
 <body>
 	<div class="content">
 		<h1>Editar Contato</h1>
-		<form name="formContato" action="insert">
+		<form name="formContato" action="update">
 			<table>
 				<tr>
 					<td><input type="text" name="id" class="small" value="<%out.print(request.getAttribute("id"));%>" readonly></td>
@@ -32,5 +32,6 @@
 			<a class="botao1" value="Adicionar" onclick="validar()">Salvar</a>
 		</form>
 	</div>
+	<script src="scripts/validador.js"></script>
 </body>
 </html>
