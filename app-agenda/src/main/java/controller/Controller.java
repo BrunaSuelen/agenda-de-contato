@@ -35,22 +35,15 @@ public class Controller extends HttpServlet {
 		switch(action) {
 			case "/main": contatos(request, response); break;
 			case "/insert": novoContato(request, response); break;
-			case "/select": editarContato(request, response); break;
+			case "/select": consultaContato(request, response); break;
 			default: response.sendRedirect("index.html");
 		}
 	}
 
 	// Listar contatos
 	protected void contatos(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// Criando um objeto que irá receber a lista de contato
+		// Criando um objeto que irï¿½ receber a lista de contato
 		ArrayList<JavaBeans> lista = dao.listarContatos();
-		/*
-		 * for (int i = 0; i < lista.size(); i++) {
-		 * System.out.println(lista.get(i).getId());
-		 * System.out.println(lista.get(i).getNome());
-		 * System.out.println(lista.get(i).getTelefone());
-		 * System.out.println(lista.get(i).getEmail()); System.out.println("------"); }
-		 */
 		
 		// encaminhar lista para agenda.jsp
 		request.setAttribute("contatos", lista);
@@ -70,9 +63,21 @@ public class Controller extends HttpServlet {
 	}
 	
 	// Editar contato 
-	protected void editarContato(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void consultaContato(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("id");
-		System.out.println(id);
+		contato.setId(id);
+		dao.buscarContatoPorId(contato);
+		System.out.println("---");
+		System.out.println(contato.getId());
+		System.out.println(contato.getNome());
+		System.out.println(contato.getTelefone());
+
+		request.setAttribute("id", contato.getId());
+		request.setAttribute("nome", contato.getNome());
+		request.setAttribute("telefone", contato.getTelefone());
+		request.setAttribute("email", contato.getEmail());
+
+		RequestDispatcher rd = request.getRequestDispatcher("editar.jsp");
+		rd.forward(request, response);
 	}
 }
-;
