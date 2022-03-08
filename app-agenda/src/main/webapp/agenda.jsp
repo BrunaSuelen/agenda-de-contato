@@ -24,6 +24,7 @@
 					<th>Nome</th>
 					<th>Telefone</th>
 					<th>Email</th>
+					<th>Opções</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -33,6 +34,9 @@
 					<td><%=lista.get(i).getNome()%></td>
 					<td><%=lista.get(i).getTelefone()%></td>
 					<td><%=lista.get(i).getEmail()%></td>
+					<td class="action">
+						<a href="select?id=<%=lista.get(i).getId()%>">Editar</a>
+					</td>
 				</tr>
 			<% } %>
 			</tbody>

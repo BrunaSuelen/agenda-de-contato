@@ -97,3 +97,27 @@ form {
 #table tbody tr td {
     color: #848484;
 }
+
+#table tbody tr td.action {
+	display: flex;
+    justify-content: center;
+}
+
+#table tbody tr td.action {
+	display: flex;
+    justify-content: center;
+}
+
+#table tbody tr td.action a {
+    background-color: #a6abeb;
+    text-decoration: none;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: small;
+}
+
+#table tbody tr td.action a:hover {
+    transform: translate(0px, -1px) scale(1.02);
+    background-color: #7487db;
+}
