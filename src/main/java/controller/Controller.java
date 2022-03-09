@@ -10,6 +10,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+
 import model.DAO;
 import model.JavaBeans;
 
@@ -18,7 +24,8 @@ import model.JavaBeans;
 		"/main",
 		"/insert",
 		"/select",
-		"/update"
+		"/update",
+		"/delete"
 	})
 
 public class Controller extends HttpServlet {
@@ -38,6 +45,7 @@ public class Controller extends HttpServlet {
 			case "/insert": novoContato(request, response); break;
 			case "/select": consultaContato(request, response); break;
 			case "/update": editarContato(request, response); break;
+			case "/delete": excluirContato(request, response); break;
 			default: response.sendRedirect("index.html");
 		}
 	}
@@ -86,6 +94,14 @@ public class Controller extends HttpServlet {
 		contato.setEmail(request.getParameter("email"));
 
 		dao.atualizarContato(contato);
+		response.sendRedirect("main");
+	}
+	
+	// Excluir contato
+	protected void excluirContato(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		contato.setId(request.getParameter("id"));
+
+		dao.excluirContato(contato);
 		response.sendRedirect("main");
 	}
 }
