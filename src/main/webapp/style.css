@@ -8,7 +8,7 @@ body {
 }
 
 .content {
-	margin: 15vh auto;
+	margin: 10vh auto 0;
     display: grid;
     width: 100%;
     justify-content: center;
@@ -17,40 +17,56 @@ body {
 .phone-wallpaper {
 	width: 200px;
 	margin: auto;
+	margin-bottom: 30px;
 }
 
 h1 {
 	color: #526ad1;
     text-align: center;
-    margin-bottom: 4rem;
+    margin-bottom: 2rem;
+    margin-top: 0;
 }
 
-.botao1 {
-    display: block;
-	text-decoration: none;
-    padding: 10px 15px;
-    font-size: 1.2em;
+.box-button { 
+    display: flex;
+}
+
+.botao {
     font-weight: 700;
     border-radius: 5px;
     text-align: center;
     border: 2px solid;
     color: #546bd0;
     cursor: pointer;
-}
-
-.botao2 {
-    display: block;
+    padding: 10px;
     text-decoration: none;
-    padding: 10px 15px;
-    font-size: 1em;
-    font-weight: 700;
-    border-radius: 5px;
-    text-align: center;
-    border: 2px solid;
-    color: #546bd0;
-    cursor: pointer;
-    margin: 0 15px;
+    animation: cubic-bezier(.17,.67,.83,.67);
+}
+
+.botao:hover {
+	transform: translatey(-2px) scale(1.02);
+}
+
+.botao img {
+    width: 15px;
+    transform: translate(-8px, 1px);
+}
+
+.novo-contato {
+    background-color: #7487db;
+    color: white;
+    margin-left: 15px;
     width: 30%;
+}
+
+.pdf {
+    width: 120px;
+    margin-left: auto;
+    margin-right: 15px;
+}
+
+.salvar-contato {
+	margin-top: 2rem;
 }
 
 input {
@@ -78,10 +94,16 @@ input:read-only {
 
 form {
     width: 100%;
+    display: contents;
 }
 
 #table {
 	border-spacing: 15px;
+}
+
+#table thead {
+    display: table;
+    width: 100%;	
 }
 
 #table thead tr {
@@ -96,6 +118,13 @@ form {
     padding: 10px 5px;
     font-weight: 400;
     color: #526ad0;
+}
+
+#table tbody {
+    max-width: 600px;
+    overflow-y: scroll;
+    display: list-item;
+        max-height: 50vh;
 }
 
 #table tbody tr td {
@@ -113,7 +142,6 @@ form {
 }
 
 #table tbody tr td.action a {
-    background-color: #a6abeb;
     text-decoration: none;
     color: white;
     padding: 5px;
@@ -123,5 +151,21 @@ form {
 
 #table tbody tr td.action a:hover {
     transform: translate(0px, -1px) scale(1.02);
+}
+
+#table tbody tr td.action a.update {
+    background-color: #a6abeb;
+}
+
+#table tbody tr td.action a.update:hover {
     background-color: #7487db;
+}
+
+#table tbody tr td.action a.delete {
+    background-color: #ff7966;
+    margin-left: 5px;
+}
+
+#table tbody tr td.action a.delete:hover {
+    background-color: #fb5942;
 }
