@@ -25,7 +25,8 @@ import model.JavaBeans;
 		"/insert",
 		"/select",
 		"/update",
-		"/delete"
+		"/delete",
+		"/pdf"
 	})
 
 public class Controller extends HttpServlet {
@@ -46,6 +47,7 @@ public class Controller extends HttpServlet {
 			case "/select": consultaContato(request, response); break;
 			case "/update": editarContato(request, response); break;
 			case "/delete": excluirContato(request, response); break;
+			case "/pdf": gerarPdf(request, response); break;
 			default: response.sendRedirect("index.html");
 		}
 	}
@@ -100,6 +102,49 @@ public class Controller extends HttpServlet {
 	// Excluir contato
 	protected void excluirContato(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		contato.setId(request.getParameter("id"));
+
+		dao.excluirContato(contato);
+		response.sendRedirect("main");
+	}
+	
+	// Gerar PDF
+	protected void gerarPdf(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Document documento = new Document();
+		
+		try {
+			response.setContentType("apllication/pdf");
+			response.addHeader("Content-Disposition", "inline; filename=" + "contatos.pdf");
+			PdfWriter.getInstance(documento, response.getOutputStream());
+			documento.open();
+			
+			documento.add(new Paragraph("Lista de contatos:"));
+			documento.add(new Paragraph("  "));
+			
+			PdfPTable tabela = new PdfPTable(3);
+			
+			PdfPCell col1 = new PdfPCell(new Paragraph("Nome"));
+			PdfPCell col2 = new PdfPCell(new Paragraph("Telefone"));
+			PdfPCell col3 = new PdfPCell(new Paragraph("Email"));
+			
+			tabela.addCell(col1);
+			tabela.addCell(col2);
+			tabela.addCell(col3);
+			
+			ArrayList<JavaBeans> lista = dao.listarContatos();
+			
+			for (int i = 0; i < lista.size(); i++) {
+				tabela.addCell(lista.get(i).getNome());
+				tabela.addCell(lista.get(i).getTelefone());
+				tabela.addCell(lista.get(i).getEmail());
+			}
+			
+			documento.add(tabela);
+			documento.close();
+			
+		} catch (Exception e) {
+			System.out.println(e);
+			documento.close();
+		}
 
 		dao.excluirContato(contato);
 		response.sendRedirect("main");
