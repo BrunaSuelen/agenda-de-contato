@@ -29,7 +29,7 @@
 					<td><input type="text" name="email" value="<%out.print(request.getAttribute("email"));%>"></td>
 				</tr>
 			</table>
-			<a class="botao1" value="Adicionar" onclick="validar()">Salvar</a>
+			<a class="botao salvar-contato" value="salvar" onclick="validar()">Salvar Contato</a>
 		</form>
 	</div>
 	<script src="scripts/validador.js"></script>
