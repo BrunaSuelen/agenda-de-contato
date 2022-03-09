@@ -7,15 +7,15 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 public class DAO {
-	/** Módulo de conexão **/
+	/** Mï¿½dulo de conexï¿½o **/
 	
-	// Parâmetros de conexão //
+	// Parï¿½metros de conexï¿½o //
 	private String driver = "com.mysql.cj.jdbc.Driver";
 	private String url = "jdbc:mysql://127.0.0.1:3306/dbagenda?useTImezone=true&serverTimezone=UTC";
 	private String user = "root";
 	private String password = "123@qwe";
 	
-	// Métodos de conexão //
+	// Mï¿½todos de conexï¿½o //
 	private Connection conectar() {
 		Connection con = null;
 		
@@ -58,13 +58,13 @@ public class DAO {
 		String create = "insert into contatos(nome, telefone, email) values (?, ?, ?)";
 		
 		try {
-			// Abrir a conexão
+			// Abrir a conexï¿½o
 			Connection con = conectar();
 			
-			// Preparar query para execução no banco de dados
+			// Preparar query para execuï¿½ï¿½o no banco de dados
 			PreparedStatement pst = con.prepareStatement(create);
 			
-			// Substituir os parametros (?) pelo conteúdo das variáveis JavaBeans
+			// Substituir os parametros (?) pelo conteï¿½do das variï¿½veis JavaBeans
 			pst.setString(1, contato.getNome());
 			pst.setString(2, contato.getTelefone());
 			pst.setString(3, contato.getEmail());
@@ -74,7 +74,7 @@ public class DAO {
 			
 			con.close();
 			
-			// Loaço de repetição será executado enquanto houver contato
+			// Loaï¿½o de repetiï¿½ï¿½o serï¿½ executado enquanto houver contato
 			//white(rs.next()) {
 				//String id = rs.getString(1);
 			//}
@@ -90,16 +90,16 @@ public class DAO {
 		String read = "select * from contatos order by nome";
 		
 		try {
-			// Abrir a conexão
+			// Abrir a conexï¿½o
 			Connection con = conectar();
 			
-			// Preparar query para execução no banco de dados
+			// Preparar query para execuï¿½ï¿½o no banco de dados
 			PreparedStatement pst = con.prepareStatement(read);
 			
 			// Executa e armazena o retorno da query
 			ResultSet rs = pst.executeQuery();
 						
-			// Laço de repetição será executado enquanto houver contato
+			// Laï¿½o de repetiï¿½ï¿½o serï¿½ executado enquanto houver contato
 			while(rs.next()) {
 				String id = rs.getString(1);
 				String nome = rs.getString(2);
@@ -117,17 +117,6 @@ public class DAO {
 			return null;
 		}
 	}
-	
-	public void testeConexao() {
-		
-		try {
-			Connection con = conectar();
-			System.out.println(con);
-			con.close();
-		} catch(Exception e) {
-			System.out.println(e);
-		}
-	}
 
 	/** CRUD UPDATE **/
 	public void atualizarContato(JavaBeans contato) {
@@ -142,6 +131,22 @@ public class DAO {
 			pst.setString(2, contato.getTelefone());
 			pst.setString(3, contato.getEmail());
 			
+			pst.executeUpdate();
+			con.close();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
+
+	/** CRUD DELETE **/
+	public void excluirContato(JavaBeans contato) {
+		String delete = "DELETE from contatos where id = ?";
+		
+		try {
+			Connection con = conectar();
+			PreparedStatement pst = con.prepareStatement(delete);
+
+			pst.setString(1, contato.getId());			
 			pst.executeUpdate();
 			con.close();
 		} catch (Exception e) {
